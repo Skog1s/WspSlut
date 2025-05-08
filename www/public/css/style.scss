@@ -1,0 +1,423 @@
+* {
+   margin: 0;
+   padding: 0;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+   box-sizing: border-box;
+}
+
+@font-face {
+   font-family: saker;
+   src: url(./fonts/SakerSansMedium.ttf);
+}
+
+@font-face {
+   font-family: saker;
+   src: url(./fonts/SakerSansBold.ttf);
+   font-weight: bold;
+}
+
+html {
+   font-size: 62.5%;
+}
+
+body {
+   font-size: 1.6rem;
+   height: 100%;
+   background-color: #e8e8e8;
+   position: relative;
+   min-height: 100vh;
+}
+
+/** Header */
+header {
+   width: 100%;
+   font-size: 1.2rem;
+   text-align: left;
+   height: 80px;
+   padding-top: 5px;
+   background-image: url("/images/bgImg.png");
+   background-repeat: repeat;
+   color: white;
+   position: relative;
+   border-bottom: 2px solid rgb(124, 10, 10);
+
+   h1 {
+      display: inline-block;
+      font-family: saker, Arial;
+      letter-spacing: 3px;
+      font-size: 2.6rem;
+      margin-top: 1.8rem;
+      margin-left: 2.5rem;
+   }
+
+   img#logga {
+      float: left;
+      height: 50px;
+      margin-top: 10px;
+      margin-left: 50px;
+   }
+
+   /* NYTT */
+   nav {
+      position: relative;
+      display: inline;
+      margin-left: 2rem;
+
+      ul {
+         list-style-type: none;
+         display: inline;
+
+         li {
+            margin-left: 1rem;
+            display: inline;
+
+            a {
+               display: inline-block;
+               padding: 6px;
+               border-bottom: 1px solid rgb(124, 10, 10);
+               font-size: 1.4rem;
+               text-decoration: none;
+               color: white;
+               background-color: black;
+
+               &:hover {
+                  border-bottom: 1px solid red;
+                  color: #ffffff;
+               }
+
+               &.active {
+                  border-bottom: 1px solid red;
+                  color: #ffffff;
+               }
+            }
+         }
+      }
+   }
+
+   button {
+      background-color: transparent;
+      border: none;
+
+      img {
+         width: 14px;
+         height: auto;
+      }
+
+      &.sign {
+         border: none;
+         border-radius: 4px;
+         padding: 5px 15px;
+         text-decoration: none;
+         color: white;
+         background-color: rgb(124, 10, 10);
+         margin-left: 1.8rem;
+
+         img {
+            display: none;
+         }
+
+         &:hover {
+            background-color: gray;
+         }
+
+         &::after {
+            content: "Logga Ut";
+         }
+      }
+
+      &:hover {
+         cursor: pointer;
+      }
+
+      img {
+         width: 28px;
+         margin-bottom: -10px;
+
+         &:hover {
+            opacity: 0.5;
+         }
+      }
+   }
+
+   form {
+      display: inline;
+      margin-bottom: 0.7rem;
+
+      input[type="text"] {
+         margin-top: 0.5rem;
+         margin-left: 1.5em;
+         font-size: 1.4rem;
+         width: 20rem;
+      }
+   }
+}
+
+@media only screen and (max-width: 1024px) {
+   header {
+      height: 12rem;
+
+      img {
+         margin-left: 25px;
+      }
+   }
+
+   /* Nytt */
+   nav {
+      position: relative;
+      display: inline;
+      margin-left: 2rem;
+
+      ul {
+         list-style-type: none;
+         display: inline;
+
+         li {
+            margin-left: 1rem;
+            display: inline;
+
+            a {
+               display: inline-block;
+               padding: 6px;
+               border-bottom: 1px solid rgb(124, 10, 10);
+               font-size: 1.4rem;
+               text-decoration: none;
+               color: white;
+               background-color: black;
+
+               &:hover {
+                  border-bottom: 1px solid red;
+                  color: #ffffff;
+               }
+
+               &.active {
+                  border-bottom: 1px solid red;
+                  color: #ffffff;
+               }
+            }
+         }
+      }
+   }
+
+   button {
+
+      background-color: transparent;
+      border: none;
+
+      img {
+         width: 14px;
+         height: auto;
+      }
+
+      &.sign {
+         border: none;
+         border-radius: 4px;
+         padding: 5px 15px;
+         text-decoration: none;
+         color: white;
+         background-color: rgb(124, 10, 10);
+         margin-left: 1.8rem;
+
+         img {
+            display: none;
+         }
+
+         &:hover {
+            background-color: gray;
+         }
+
+         &::after {
+            content: "Logga Ut";
+         }
+      }
+
+      &:hover {
+         cursor: pointer;
+      }
+
+      img {
+         width: 28px;
+         margin-bottom: -10px;
+
+         &:hover {
+            opacity: 0.5;
+         }
+      }
+   }
+
+   form {
+      display: inline;
+      margin-bottom: 0.7rem;
+
+      input[type="text"] {
+         margin-top: 0.5rem;
+         margin-left: 1.5em;
+         font-size: 1.4rem;
+         width: 20rem;
+      }
+   }
+}
+
+@media only screen and (max-width: 675px) {
+   header {
+      height: 108px;
+
+      img {
+         margin-left: 15px;
+      }
+
+      /** NYTT **/
+      input,
+      button.search {
+         display: none;
+         margin-top: 1rem;
+         justify-content: right;
+         margin-left: 10px;
+      }
+
+      button.sign {
+         margin-left: 2.6rem;
+         padding: 0;
+         background-color: transparent;
+         position: absolute;
+         right: 15px;
+         top: 15px;
+
+         &:hover {
+            background-color: transparent;
+            color: alpha($color: #000000);
+         }
+
+         &::after {
+            content: none;
+         }
+
+         img {
+            display: inline;
+         }
+      }
+
+      button.search {
+         display: none;
+      }
+
+      nav {
+         ul {
+            li {
+               margin-left: 0.3rem;
+            }
+         }
+      }
+   }
+}
+
+/** END header */
+
+
+
+main {
+   max-width: 768px;
+   margin: 0 auto;
+   padding: 20px 4px 45px 4px;
+   position: relative;
+   height: 100%;
+
+   h1 {
+      font-family: saker, Arial, Helvetica, sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.4rem;
+   }
+
+   h2 {
+      margin-top: 0.5rem;
+      font-family: Arial, sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+   }
+
+   h3 {
+      margin-top: 4px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+   }
+
+   h4 {
+      margin-top: 4px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+   }
+}
+
+label {
+   display: block;
+}
+
+input {
+   width: 100%;
+
+   &[type="submit"] {
+      color: white;
+      background-color: #166fe5;
+      border: none;
+      margin: 10px 10px 0 0;
+      padding: 0.7rem;
+      border-radius: 6px;
+
+      &:hover {
+         background-color: blue;
+      }
+   }
+}
+main {
+   aside,
+   section {
+      display: inline-block;
+      vertical-align: top;
+   }
+   
+   aside {
+      margin-right: 10px;
+   }
+   
+   button {
+      width: 100%;
+      color: white;
+      background-color: grey;
+      border: none;
+      margin: 10px 10px 0 0;
+      padding: 0.7rem;
+      border-radius: 6px;
+   
+      &:hover {
+         background-color: #aeaeae;
+      }
+   }
+   
+   p.center {
+      text-align: center;
+      margin-top: 0.5rem;
+   }
+   
+   @media only screen and (max-width: 675px) {
+      img {
+         display: none;
+      }
+   }
+}
+
+
+/** footer */
+footer {
+   height: 45px;
+   width: 100%;
+   background-image: url('/images/bgImgLarge.png');
+   border-top: 2px solid rgb(124, 10, 10);
+   position: absolute;
+   bottom: 0;
+
+   p {
+      color: white;
+      padding: 1rem;
+   }
+}

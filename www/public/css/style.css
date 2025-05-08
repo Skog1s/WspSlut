@@ -1,0 +1,352 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: saker;
+  src: url(./fonts/SakerSansMedium.ttf);
+}
+@font-face {
+  font-family: saker;
+  src: url(./fonts/SakerSansBold.ttf);
+  font-weight: bold;
+}
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  height: 100%;
+  background-color: #e8e8e8;
+  position: relative;
+  min-height: 100vh;
+}
+
+/** Header */
+header {
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: left;
+  height: 80px;
+  padding-top: 5px;
+  background-image: url("/images/bgImg.png");
+  background-repeat: repeat;
+  color: white;
+  position: relative;
+  border-bottom: 2px solid rgb(124, 10, 10);
+  /* NYTT */
+}
+header h1 {
+  display: inline-block;
+  font-family: saker, Arial;
+  letter-spacing: 3px;
+  font-size: 2.6rem;
+  margin-top: 1.8rem;
+  margin-left: 2.5rem;
+}
+header img#logga {
+  float: left;
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+header nav {
+  position: relative;
+  display: inline;
+  margin-left: 2rem;
+}
+header nav ul {
+  list-style-type: none;
+  display: inline;
+}
+header nav ul li {
+  margin-left: 1rem;
+  display: inline;
+}
+header nav ul li a {
+  display: inline-block;
+  padding: 6px;
+  border-bottom: 1px solid rgb(124, 10, 10);
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+}
+header nav ul li a:hover {
+  border-bottom: 1px solid red;
+  color: #ffffff;
+}
+header nav ul li a.active {
+  border-bottom: 1px solid red;
+  color: #ffffff;
+}
+header button {
+  background-color: transparent;
+  border: none;
+}
+header button img {
+  width: 14px;
+  height: auto;
+}
+header button.sign {
+  border: none;
+  border-radius: 4px;
+  padding: 5px 15px;
+  text-decoration: none;
+  color: white;
+  background-color: rgb(124, 10, 10);
+  margin-left: 1.8rem;
+}
+header button.sign img {
+  display: none;
+}
+header button.sign:hover {
+  background-color: gray;
+}
+header button.sign::after {
+  content: "Logga Ut";
+}
+header button:hover {
+  cursor: pointer;
+}
+header button img {
+  width: 28px;
+  margin-bottom: -10px;
+}
+header button img:hover {
+  opacity: 0.5;
+}
+header form {
+  display: inline;
+  margin-bottom: 0.7rem;
+}
+header form input[type=text] {
+  margin-top: 0.5rem;
+  margin-left: 1.5em;
+  font-size: 1.4rem;
+  width: 20rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  header {
+    height: 12rem;
+  }
+  header img {
+    margin-left: 25px;
+  }
+  /* Nytt */
+  nav {
+    position: relative;
+    display: inline;
+    margin-left: 2rem;
+  }
+  nav ul {
+    list-style-type: none;
+    display: inline;
+  }
+  nav ul li {
+    margin-left: 1rem;
+    display: inline;
+  }
+  nav ul li a {
+    display: inline-block;
+    padding: 6px;
+    border-bottom: 1px solid rgb(124, 10, 10);
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+  }
+  nav ul li a:hover {
+    border-bottom: 1px solid red;
+    color: #ffffff;
+  }
+  nav ul li a.active {
+    border-bottom: 1px solid red;
+    color: #ffffff;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+  }
+  button img {
+    width: 14px;
+    height: auto;
+  }
+  button.sign {
+    border: none;
+    border-radius: 4px;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(124, 10, 10);
+    margin-left: 1.8rem;
+  }
+  button.sign img {
+    display: none;
+  }
+  button.sign:hover {
+    background-color: gray;
+  }
+  button.sign::after {
+    content: "Logga Ut";
+  }
+  button:hover {
+    cursor: pointer;
+  }
+  button img {
+    width: 28px;
+    margin-bottom: -10px;
+  }
+  button img:hover {
+    opacity: 0.5;
+  }
+  form {
+    display: inline;
+    margin-bottom: 0.7rem;
+  }
+  form input[type=text] {
+    margin-top: 0.5rem;
+    margin-left: 1.5em;
+    font-size: 1.4rem;
+    width: 20rem;
+  }
+}
+@media only screen and (max-width: 675px) {
+  header {
+    height: 108px;
+    /** NYTT **/
+  }
+  header img {
+    margin-left: 15px;
+  }
+  header input,
+  header button.search {
+    display: none;
+    margin-top: 1rem;
+    justify-content: right;
+    margin-left: 10px;
+  }
+  header button.sign {
+    margin-left: 2.6rem;
+    padding: 0;
+    background-color: transparent;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+  }
+  header button.sign:hover {
+    background-color: transparent;
+    color: 1;
+  }
+  header button.sign::after {
+    content: none;
+  }
+  header button.sign img {
+    display: inline;
+  }
+  header button.search {
+    display: none;
+  }
+  header nav ul li {
+    margin-left: 0.3rem;
+  }
+}
+/** END header */
+main {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 20px 4px 45px 4px;
+  position: relative;
+  height: 100%;
+}
+main h1 {
+  font-family: saker, Arial, Helvetica, sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 0.4rem;
+}
+main h2 {
+  margin-top: 0.5rem;
+  font-family: Arial, sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+main h3 {
+  margin-top: 4px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+main h4 {
+  margin-top: 4px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+label {
+  display: block;
+}
+
+input {
+  width: 100%;
+}
+input[type=submit] {
+  color: white;
+  background-color: #166fe5;
+  border: none;
+  margin: 10px 10px 0 0;
+  padding: 0.7rem;
+  border-radius: 6px;
+}
+input[type=submit]:hover {
+  background-color: blue;
+}
+
+main aside,
+main section {
+  display: inline-block;
+  vertical-align: top;
+}
+main aside {
+  margin-right: 10px;
+}
+main button {
+  width: 100%;
+  color: white;
+  background-color: grey;
+  border: none;
+  margin: 10px 10px 0 0;
+  padding: 0.7rem;
+  border-radius: 6px;
+}
+main button:hover {
+  background-color: #aeaeae;
+}
+main p.center {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+@media only screen and (max-width: 675px) {
+  main img {
+    display: none;
+  }
+}
+
+/** footer */
+footer {
+  height: 45px;
+  width: 100%;
+  background-image: url("/images/bgImgLarge.png");
+  border-top: 2px solid rgb(124, 10, 10);
+  position: absolute;
+  bottom: 0;
+}
+footer p {
+  color: white;
+  padding: 1rem;
+}/*# sourceMappingURL=style.css.map */
