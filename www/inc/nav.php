@@ -11,4 +11,4 @@
         <li><a href="/prefernces">Inställningar</a></li>
     </ul>
 </nav>
-<button class="sign"><img src="/images/logout.png" alt="Logga Ut" /></button>
+<a href="../api/logout.php"><button class="sign"><img src="/images/logout.png" alt="Logga Ut" /></button></a>

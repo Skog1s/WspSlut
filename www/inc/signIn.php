@@ -2,8 +2,8 @@
     <img src="/images/mobile.png" alt="Mobiltelefon" width="240" />
 </aside>
 <section>
-    <h2>Skapa konto på EGY Talk</h2>
-    <form method="post">
+    <h2>Logga in på EGY Talk</h2>
+    <form action="./api/login.php" method="post">
         <label for="usr">Användarnamn</label>
         <input id="usr" type="text" name="user" />
 
@@ -13,6 +13,6 @@
         <input type="submit" value="Logga In" />
     </form>
     <p class="center">eller</p>
-    <button>Skapa Konto</button>
+        <a href="index.php?"><button type="submit">Skapa Konto</button></a>
 </section>
 

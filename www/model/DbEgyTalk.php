@@ -85,17 +85,17 @@ class DbEgyTalk
      * Kontrollerar av användare och lösen.
      * Skapar global sessions-array med användarinformation.
      *
-     * @param  $userName  Användarnamn
-     * @param  $passWord  Lösenord
+     * @param  $username  Användarnamn
+     * @param  $password  Lösenord
      * @return $response användardata eller tom [] om inloggning misslyckas
      */
-    function getUser($userName, $passWord) {
-        $userName = trim(filter_var($userName, FILTER_UNSAFE_RAW));
+    function getUser($username, $pwd) {
+        $userName = trim(filter_var($username, FILTER_UNSAFE_RAW));
         $response = [];
 
         /* Bygger upp sql frågan */
         $stmt = $this->db->prepare("SELECT * FROM user WHERE username = :user");
-        $stmt->bindValue(":user", $userName);
+        $stmt->bindValue(":user", $username);
         $stmt->execute();
 
 
@@ -104,7 +104,7 @@ class DbEgyTalk
             // Hämtar användaren, kan endast vara 1 person
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             // Kontrollerar lösenordet, och allt ok.
-            if (password_verify($passWord, $user['password'])) {
+            if (password_verify($pwd, $user['password'])) {
                 $response['uid'] = $user['uid'];
                 $response['username'] = $user['username'];
                 $response['firstname'] = $user['firstname'];

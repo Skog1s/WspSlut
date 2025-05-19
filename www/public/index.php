@@ -13,11 +13,21 @@
 
 	<main>
     <?php   
-	    if(isset($_SESSION['uid'])){
-            // Show Flow
-        }else{ 
-            include $_SERVER['DOCUMENT_ROOT'] . '/../inc/signUp.php';
-        } 
+
+if(isset($_GET['login'])){
+    $login = true;
+}else{
+    $login = false;
+}
+
+if(isset($_SESSION['uid'])){
+    // Show Flow
+    // Visar för de som är inloggade
+}elseif($login == true){
+    include $_SERVER['DOCUMENT_ROOT'] . '/../inc/signIn.php';
+}else if($login == false){ 
+    include $_SERVER['DOCUMENT_ROOT'] . '/../inc/signUp.php';
+}
     ?>
 	</main>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/../inc/footer.php'; ?>

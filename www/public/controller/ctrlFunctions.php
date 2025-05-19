@@ -7,16 +7,16 @@ include_once('../model/dbFunctions.php');
  * Kontrollerar av användare och lösen.
  * Skapar global sessions-array med användarinformation.
  *
- * @param  $userName  Användarnamn
- * @param  $passWord  Lösenord
+ * @param  $username  Användarnamn
+ * @param  $password  Lösenord
  * @return $response användardata eller tom [] om inloggning misslyckas
  */
-function auth($userName, $password){
+function auth($username, $password){
    $success = false;
-   $userName = trim(filter_var($userName, FILTER_SANITIZE_SPECIAL_CHARS));
+   $username = trim(filter_var($username, FILTER_SANITIZE_SPECIAL_CHARS));
 
    $db = connectToDb();
-   $response = getUser($db, $userName, $password);
+   $response = getUser($db, $username, $password);
 
    if (!empty($response)) {
       session_regenerate_id();

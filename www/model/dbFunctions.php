@@ -21,17 +21,17 @@ function connectToDb(){
  * Kontrollerar av användare och lösen.
  *
  * @param  $db  databasobjekt (pdo)
- * @param  $userName  Användarnamn
- * @param  $passWord  Lösenord
+ * @param  $username  Användarnamn
+ * @param  $pwd  Lösenord
  * @return $response användardata eller tom [] om inloggning misslyckas
  */
-function getUser($db, $userName, $password) {
+function getUser($db, $username, $pwd) {
     $response = [];
 
     try {
         /* Bygger upp sql frågan */
         $stmt = $db->prepare("SELECT * FROM user WHERE username = :user");
-        $stmt->bindValue(":user", $userName);
+        $stmt->bindValue(":user", $username);
         $stmt->execute();
     } catch(Exception $e){
         /** Tom array om anropet misslyckas */
@@ -43,7 +43,7 @@ function getUser($db, $userName, $password) {
         // Hämtar användaren, kan endast vara 1 person
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         // Kontrollerar lösenordet, och allt ok.
-        if (password_verify($password, $user['password'])) {
+        if (password_verify($pwd, $user['password'])) {
             $response = $user;
         }
     }
