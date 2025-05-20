@@ -43,7 +43,7 @@ function getUser($db, $username, $pwd) {
         // Hämtar användaren, kan endast vara 1 person
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         // Kontrollerar lösenordet, och allt ok.
-        if (password_verify($pwd, $user['password'])) {
+        if (password_verify($pwd, $user['pwd'])) {
             $response = $user;
         }
     }

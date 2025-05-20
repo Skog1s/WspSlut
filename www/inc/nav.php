@@ -5,7 +5,7 @@
 
 <nav>
     <ul>
-        <li><a href="/"><?php echo $_SESSION['name']; ?></a></li>
+        <li><a href="/"><?php echo $_SESSION['username']; ?></a></li>
         <li><a href="/flow">Flöde</a></li>
         <li><a href="/friends">Vänner</a></li>
         <li><a href="/prefernces">Inställningar</a></li>

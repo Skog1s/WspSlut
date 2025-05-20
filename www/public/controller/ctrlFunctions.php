@@ -8,15 +8,15 @@ include_once('../model/dbFunctions.php');
  * Skapar global sessions-array med användarinformation.
  *
  * @param  $username  Användarnamn
- * @param  $password  Lösenord
+ * @param  $pwd  Lösenord
  * @return $response användardata eller tom [] om inloggning misslyckas
  */
-function auth($username, $password){
+function auth($username, $pwd){
    $success = false;
    $username = trim(filter_var($username, FILTER_SANITIZE_SPECIAL_CHARS));
 
    $db = connectToDb();
-   $response = getUser($db, $username, $password);
+   $response = getUser($db, $username, $pwd);
 
    if (!empty($response)) {
       session_regenerate_id();
@@ -44,11 +44,4 @@ function getPostsFromUser($uid){
 
    $db = connectToDb();
    return getPosts($db, $uid);
-}
-/**
- * Loggar ut genom att ta bort sessionen
- */
-function logOut(){
-   $_SESSION = array();
-   session_destroy();
 }

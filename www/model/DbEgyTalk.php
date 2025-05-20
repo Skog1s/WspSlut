@@ -29,27 +29,18 @@ class DbEgyTalk
         $this->db = new PDO($dsn, DB_USER, DB_PASSWORD);
     }
 
-    /**
-     * Hämtar alla poster som gjorts på egytalk
+  /**
+     * Hämtar alla inlägg från flödet.
      *
-     * @return array med alla posterr
+     * @return array En array med alla inlägg, sorterade efter datum (nyast först).
      */
-    function getAllPosts() {
-        $posts = [];
-        
-        try{
-            $sqlkod = "SELECT post.*, user.firstname, user.surname, user.username FROM post 
-                NATURAL JOIN user ORDER BY post.date LIMIT 0,30";
-            /* Kör frågan mot databasen egytalk och tabellen Status */
-            $stmt = $this->db->prepare($sqlkod);
-            $stmt->execute();
-
-            $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }catch(Exception $e){}
-        
-        return $posts;
+    function getAllPosts(){
+        // Ensure you select all necessary columns, e.g., uid, username, post_txt, date
+        $stmt = $this->db->prepare("SELECT uid, username, post_txt, date FROM flow ORDER BY date DESC");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    
     /**
      * Hämtar poster för en användare,
      * sorterade efter publiceringsdatum
@@ -137,7 +128,7 @@ class DbEgyTalk
      * @return true om det lyckades, annars false
      */
     function addPost($uid, $postTxt){
-        $stmt = $this->db->prepare("INSERT INTO post(uid, post_txt, date) VALUES(:uid, :post, :date)");
+        $stmt = $this->db->prepare("INSERT INTO flow(uid, post_txt, date) VALUES(:uid, :post, :date)");
 
         $stmt->bindValue(":uid", $uid);
         $stmt->bindValue(":post", $postTxt);

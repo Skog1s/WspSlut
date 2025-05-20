@@ -1,7 +1,5 @@
 <?php    
-echo "AAA";
 if(isset($_POST['firstname'],$_POST['surname'],$_POST['username'],$_POST['pwd'])){        
-    echo "BBBB";
     include_once('../../inc/db.inc.php');    
    
     $fname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -19,7 +17,6 @@ if(isset($_POST['firstname'],$_POST['surname'],$_POST['username'],$_POST['pwd'])
     
     // Om INSERT gick bra!
     try{
-        echo "CCCC";
         $stmt->execute();
         header('Location: ../index.php'); // Borde visa att allt gick bra!
     }catch(Exception $e){

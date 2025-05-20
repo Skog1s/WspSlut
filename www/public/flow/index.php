@@ -15,6 +15,7 @@
     <?php   
 	    if(isset($_SESSION['uid'])){
             // Show Flow
+            
         }else{ 
             // Egen kod!
         } 
