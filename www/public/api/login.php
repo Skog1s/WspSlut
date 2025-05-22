@@ -6,7 +6,7 @@
    	 $pwd = $_POST['pwd'];
    	 
    	 /* Bygger upp sql frågan */
-   	 $stmt= $db->prepare("SELECT * FROM userInfo WHERE username = :user");
+   	 $stmt= $db->prepare("SELECT * FROM user WHERE username = :user");
    	 $stmt->bindValue(":user", $user);
    	 
    	 $stmt->execute();

@@ -8,10 +8,10 @@ function connectToDb(){
     define ('DB_USER', 'egytalk');
     define ('DB_PASSWORD', '12345');
     define ('DB_HOST', 'mariadb'); // mariadb om docker annars localhost
-    define ('DB_NAME', 'egytalk');
+    define ('DB_NAME', 'db');
     
     // Skapar en anslutning till MySql och databasen egytalk
-    $dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8';
+    $dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4';
     $db = new PDO($dsn, DB_USER, DB_PASSWORD);
     
     return $db;
@@ -61,7 +61,16 @@ function getUser($db, $username, $pwd) {
 function getPosts($db, $uid){
     $response = [];
 
-    // Egen kod!
+    try {
+        $sqlkod = "SELECT post.*, user.firstname, user.surname, user.username 
+                   FROM post NATURAL JOIN user 
+                   WHERE post.uid = :uid 
+                   ORDER BY post.date DESC";
+        $stmt = $db->prepare($sqlkod);
+        $stmt->bindValue(":uid", $uid);
+        $stmt->execute();
+        $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch(Exception $e) {}
     
     return $response;
 }
@@ -77,7 +86,7 @@ function getAllPosts($db){
 
     try{
         $sqlkod = "SELECT post.*, user.firstname, user.surname, user.username 
-        FROM post NATURAL JOIN user ORDER BY post.date LIMIT 0,30";
+        FROM post NATURAL JOIN user ORDER BY post.date DESC LIMIT 0,30";
     
         /* Kör frågan mot databasen egytalk och tabellen post */
         $stmt = $db->prepare($sqlkod);
@@ -87,4 +96,49 @@ function getAllPosts($db){
     }catch(Exception $e){}
 
     return $response;
+}
+
+/**
+ * Hämtar alla kommentarer för ett specifikt inlägg.
+ *
+ * @param PDO $db PDO-objekt för databasanslutning.
+ * @param int $pid ID för inlägget vars kommentarer ska hämtas.
+ * @return array En array med kommentarer, sorterade efter datum.
+ */
+function getCommentsByPostId($db, $pid) {
+    $response = [];
+    try {
+        $sql = "SELECT c.*, u.username 
+                FROM comment c
+                JOIN user u ON c.uid = u.uid
+                WHERE c.pid = :pid 
+                ORDER BY c.date ASC"; // Ändra till DESC för nyaste först om så önskas
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':pid', $pid, PDO::PARAM_INT); // Antagande att pid är INT
+        $stmt->execute();
+        $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        // Här kan du logga felet, t.ex. error_log($e->getMessage());
+    }
+    return $response;
+}
+
+/**
+ * Lägger till en ny kommentar i databasen.
+ *
+ * @param PDO $db PDO-objekt för databasanslutning.
+ * @param int $pid ID för inlägget som kommenteras.
+ * @param string $uid ID för användaren som skriver kommentaren.
+ * @param string $commentText Kommentartexten.
+ * @return bool True om kommentaren lades till, annars false.
+ */
+function addComment($db, $pid, $uid, $commentText) {
+    try {
+        $sql = "INSERT INTO comment (pid, uid, comment_txt, date) VALUES (:pid, :uid, :comment_txt, :date)";
+        $stmt = $db->prepare($sql);
+        return $stmt->execute([':pid' => $pid, ':uid' => $uid, ':comment_txt' => $commentText, ':date' => date("Y-m-d H:i:s")]);
+    } catch (PDOException $e) {
+        // Här kan du logga felet, t.ex. error_log($e->getMessage());
+        return false;
+    }
 }

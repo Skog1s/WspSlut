@@ -3,7 +3,7 @@
 <html lang="sv">
 <head>
     <meta charset="utf-8">
-    <title>EGY Talk</title>
+    <title>Globalt Flöde - EGY Talk</title>
 	<link rel="stylesheet" href="/css/style.css">
     <link rel="icon" href="/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,39 +12,17 @@
 	<?php include $_SERVER['DOCUMENT_ROOT'] . '/../inc/header.php'; ?>
 
 	<main>
-    <?php   
-    // Inkludera dbFunctions för att få tillgång till databasfunktioner
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/../model/dbFunctions.php'; 
+    <section class="all-posts-section">
+        <h2>Globalt flöde</h2>
+        <?php   
+        // Inkludera dbFunctions för att få tillgång till databasfunktioner
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/../model/dbFunctions.php'; 
 
-    if(isset($_GET['login'])){
-        $login = true;
-    }else{
-        $login = false;
-    }
-    
-    if(isset($_SESSION['uid'])){
-        // Show Flow ?>
-        <section class="create-post-section">
-            <h2><?php echo htmlspecialchars($_SESSION['username']); ?> talk</h2>
-            <form action="./api/createPost.php" method="POST" class="create-post-form">
-                <div>
-                    <label for="post_content">Gör ett inlägg!</label>
-                    <textarea id="post_content" name="post_content" rows="4" required placeholder="Skriv här..."></textarea>
-                </div>
-                <button type="submit" class="button">Post</button>
-            </form>
-        </section>
-        <hr> 
-        <?php
-        // Hämta och visa användarens egna inlägg
         $db = connectToDb();
-        $userPosts = getPosts($db, $_SESSION['uid']);
+        $allPosts = getAllPosts($db); 
 
-        if (!empty($userPosts)) {
-            echo "<section class='user-posts-section'>";
-            echo "<h2>Dina senaste inlägg</h2>";
-            foreach ($userPosts as $post) {
-                
+        if (!empty($allPosts)) {
+            foreach ($allPosts as $post) {
                 $postId = $post['pid'] ?? null; // Säkerställer att pid finns
 
                 echo "<article class='post' id='post-" . htmlspecialchars($postId) . "'>";
@@ -52,8 +30,7 @@
                 echo "<p class='post-date'>" . htmlspecialchars($post['date']) . "</p>";
                 echo "<p>" . htmlspecialchars($post['post_txt']) . "</p>";
 
-                // Kommentarer
-                if ($postId) { 
+                if ($postId) { // Visa bara kommentarer om postID finns
                     $comments = getCommentsByPostId($db, $postId);
 
                     echo "<div class='comments-section'>";
@@ -79,24 +56,18 @@
                 }
                 echo "</article>";
             }
-            echo "</section>";
         } else {
-            echo "<p class='center'>Du har inga inlägg än. Skriv något!</p>";
+            echo "<p class='center'>Det finns inga inlägg i flödet än.</p>";
         }
-        
-    } elseif($login == true){
-        include $_SERVER['DOCUMENT_ROOT'] . '/../inc/signIn.php';
-    }else if($login == false){ 
-        include $_SERVER['DOCUMENT_ROOT'] . '/../inc/signUp.php';
-    }
-    ?>
+        ?>
+    </section>
 	</main>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/../inc/footer.php'; ?>
 </body>
 </html>
 
 <style>
-.create-post-section {
+    create-post-section {
     background-color: #ffffff;
     padding: 20px;
     margin: 30px auto;
@@ -175,7 +146,7 @@ hr {
     margin-bottom: 20px;
 }
 
-.user-posts-section {
+.all-posts-section { 
     background-color: #ffffff;
     padding: 20px;
     margin: 20px auto; 
@@ -187,7 +158,7 @@ hr {
     border: 1px solid #000000;
 }
 
-.user-posts-section h2 {
+.all-posts-section h2 { 
     margin-top: 0;
     margin-bottom: 15px;
     color: #000000; 
@@ -282,7 +253,7 @@ hr {
     box-sizing: border-box;
     font-family: inherit;
     font-size: 0.95em;
-    resize: none;
+    resize: none; 
     min-height: 60px;
 }
 

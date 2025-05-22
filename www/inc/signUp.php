@@ -3,7 +3,7 @@
 </aside>
 <section>
     <h2>Skapa konto på EGY Talk</h2>
-    <form method="post" action="./api/createUser.php">
+    <form method="post" action="api/createUser.php">
         <label for="fn">Förnamn</label>
         <input id="fn" type="text" name="firstname" />
 

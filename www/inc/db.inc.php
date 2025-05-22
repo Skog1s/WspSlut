@@ -3,7 +3,7 @@
 	define ('DB_USER', 'egytalk');
 	define ('DB_PASSWORD', '12345');
 	define ('DB_HOST', 'mariadb'); // localhost
-	define ('DB_NAME', 'egytalk');
+	define ('DB_NAME', 'db');
 	
 	// Skapar en anslutning till MySql och databasen world
 	$dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8';
