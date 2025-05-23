@@ -30,6 +30,15 @@
                 echo "<p class='post-date'>" . htmlspecialchars($post['date']) . "</p>";
                 echo "<p>" . htmlspecialchars($post['post_txt']) . "</p>";
 
+               
+                if (isset($_SESSION['uid']) && isset($post['uid']) && $_SESSION['uid'] == $post['uid']) {
+                    echo "<form action='./api/deletePost.php' method='POST' class='delete-form'>";
+                    echo "<input type='hidden' name='post_id' value='" . htmlspecialchars($postId) . "'>";
+                    echo "<input type='hidden' name='origin' value='flow'>"; 
+                    echo "<button type='submit' class='button delete-button' onclick=\"return confirm('Är du säker på att du vill radera detta inlägg och alla dess kommentarer?');\">Radera Inlägg</button>";
+                    echo "</form>";
+                }
+
                 if ($postId) { // Visa bara kommentarer om postID finns
                     $comments = getCommentsByPostId($db, $postId);
 
@@ -40,6 +49,15 @@
                             echo "<div class='comment'>";
                             echo "<p class='comment-author'><strong>" . htmlspecialchars($comment['username']) . "</strong> (" . htmlspecialchars($comment['date']) . "):</p>";
                             echo "<p class='comment-text'>" . htmlspecialchars($comment['comment_txt']) . "</p>";
+
+                            if (isset($_SESSION['uid']) && isset($comment['uid']) && $_SESSION['uid'] == $comment['uid'] && isset($comment['cid'])) {
+                                echo "<form action='./api/deleteComment.php' method='POST' class='delete-form comment-delete-form'>";
+                                echo "<input type='hidden' name='comment_id' value='" . htmlspecialchars($comment['cid']) . "'>";
+                                echo "<input type='hidden' name='post_id_for_redirect' value='" . htmlspecialchars($postId) . "'>";
+                                echo "<input type='hidden' name='origin' value='flow'>"; 
+                                echo "<button type='submit' class='button delete-button comment-delete-button' onclick=\"return confirm('Är du säker på att du vill radera denna kommentar?');\">Radera Kommentar</button>";
+                                echo "</form>";
+                            }
                             echo "</div>";
                         }
                     } else {
@@ -265,5 +283,31 @@ hr {
 .comment-form .comment-button { 
     margin-top: 10px;
     
+}
+
+.delete-form {
+    display: block; /* Gör att knappen hamnar på en ny rad */
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.comment-delete-form {
+     margin-left: 0; /* Justera om det behövs för inbäddade kommentarer */
+}
+
+.button.delete-button {
+    background-color: #dc3545; /* Röd färg för radering */
+    color: white;
+    border: 1px solid #c82333;
+    padding: 6px 12px; 
+    font-size: 0.9em;   
+    cursor: pointer;
+    border-radius: 4px;
+    width: fit-content;
+}
+
+.button.delete-button:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
 }
 </style>
